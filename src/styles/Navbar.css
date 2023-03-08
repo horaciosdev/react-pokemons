@@ -1,0 +1,44 @@
+/* Define a altura da navbar e a cor de fundo */
+.navbar {
+  width: 100vw;
+  height: 80px;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Alinha a logo à esquerda e define estilos para o burger menu */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-burger {
+  display: none;
+}
+
+/* Define estilos para a imagem da logo */
+.navbar-brand img {
+  height: 60px;
+  margin-right: 10px;
+}
+
+/* Define estilos para a lista de links e animações para o hover */
+.navbar-menu {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-item {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-item:hover {
+  color: #f1c40f;
+  transform: scale(1.1);
+}
