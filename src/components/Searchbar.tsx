@@ -13,8 +13,9 @@ export const Searchbar = () => {
   };
 
   const handleClick = () => {
-    navigate(`pokemon/${term}`);
+    navigate(`pokemon/${term.trim() || ""}`);
   };
+
   return (
     <div className="search-bar">
       <div className="search-input">
