@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import "../styles/PokemonSearch.css";
+import Carousel from "../components/Carousel";
 
 interface IPokemon {
   name: string;
@@ -20,6 +21,13 @@ interface IPokemon {
 interface IChain {
   name: string;
   src: string;
+}
+
+interface ICard {
+  id: string;
+  name: string;
+  imageUrl: string;
+  imageUrlHiRes: string;
 }
 
 function getRandomGlareBackground(qtd: number) {
@@ -46,6 +54,8 @@ export default function PokemonSearch() {
   const { term } = useParams();
   const [pokemon, setPokemon] = useState<IPokemon | null>(null);
   const [pokemonChain, setPokemonChain] = useState<IChain[] | null>(null);
+  const [cards, setCards] = useState<ICard[] | null>(null);
+  const [images, setImages] = useState<string[]>([]);
 
   const glare = getRandomGlareBackground(20);
 
@@ -55,10 +65,13 @@ export default function PokemonSearch() {
         const response = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${term}`
         );
+
+        // Load Chain
         const speciesUrl = response.data.species.url;
         const speciesResponse = await axios.get(speciesUrl);
         const evolutionChainUrl = speciesResponse.data.evolution_chain.url;
         const evolutionChainResponse = await axios.get(evolutionChainUrl);
+
         let chain = evolutionChainResponse.data.chain;
 
         let url = chain.species.url;
@@ -93,14 +106,50 @@ export default function PokemonSearch() {
         setPokemonChain(newPokemonChain);
       }
     }
+
     searchPokemon();
   }, [term]);
+
+  useEffect(() => {
+    async function loadCards() {
+      if (pokemon) {
+        // Load Cards
+        const responseCards = await axios.get(
+          `https://api.pokemontcg.io/v1/cards?name=${pokemon.name
+            .trim()
+            .toLocaleLowerCase()}`
+        );
+
+        setCards(responseCards.data.cards);
+
+        let imagesArr: string[] = [];
+        if (responseCards.data.cards) {
+          responseCards.data.cards.forEach((card: ICard) => {
+            imagesArr = [...imagesArr, card.imageUrl];
+          });
+          setImages(imagesArr);
+        }
+      }
+    }
+
+    loadCards();
+  }, [pokemon]);
 
   return (
     <div>
       {pokemon && (
         <div>
-          <div className="pokemon-card">
+          <Carousel images={images} />
+          {/* <div className="cards-container">
+            {cards &&
+              cards.map((card) => (
+                <div className="card">
+                  <img key={card.id} src={card.imageUrl} alt={card.name} />
+                </div>
+              ))}
+          </div> */}
+
+          {/* <div className="pokemon-card">
             <div
               className={`card-content type_${pokemon.types[0].type.name}`}
               style={{
@@ -116,12 +165,12 @@ export default function PokemonSearch() {
                 <p>Type: {pokemon.types[0].type.name}</p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="pokemon-chain">
             {pokemonChain &&
-              pokemonChain.map((pokechain) => (
-                <div>
+              pokemonChain.map((pokechain, index) => (
+                <div key={index}>
                   <h2>{pokechain.name}</h2>
 
                   <div className="pokemon-images">

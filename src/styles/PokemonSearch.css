@@ -42,6 +42,27 @@
   align-items: center;
 }
 
+/*#########################*/
+.cards-container {
+  width: 20rem;
+  background: white;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+}
+
+.cards-container .card {
+  min-width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+}
+
+.cards-container .card img {
+  width: 100%;
+}
+
 /* TYPES */
 .type_normal {
   background-color: #aa9;
