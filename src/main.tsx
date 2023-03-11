@@ -5,7 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 import Home from "./pages/Home";
 import App from "./App";
-import PokemonSearch from "./pages/PokemonSearch";
+import Pokemon from "./pages/Pokemon";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "pokemon/:term?",
-        element: <PokemonSearch />,
+        element: <Pokemon />,
       },
     ],
   },
