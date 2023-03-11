@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import "../styles/PokemonSearch.css";
 import Carousel from "../components/Carousel";
+import { FaArrowRight } from "react-icons/fa";
 
 interface IPokemon {
   name: string;
@@ -139,7 +140,15 @@ export default function PokemonSearch() {
     <div>
       {pokemon && (
         <div>
-          <Carousel images={images} />
+          <header className="pokemon-search-header">
+            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            <h1 className="pokemon-title-name">{pokemon.name}</h1>
+          </header>
+
+          <div className="cards-carousel">
+            <h1>Cards</h1>
+            <Carousel images={images} />
+          </div>
           {/* <div className="cards-container">
             {cards &&
               cards.map((card) => (
@@ -167,17 +176,24 @@ export default function PokemonSearch() {
             </div>
           </div> */}
 
-          <div className="pokemon-chain">
-            {pokemonChain &&
-              pokemonChain.map((pokechain, index) => (
-                <div key={index}>
-                  <h2>{pokechain.name}</h2>
-
-                  <div className="pokemon-images">
-                    <img src={pokechain.src} alt={pokechain.name} />
+          <div className="pokemon-evolution">
+            <h1>Evolution</h1>
+            <div className="pokemon-chain">
+              {pokemonChain &&
+                pokemonChain.map((pokechain, index) => (
+                  <div key={index} className="pokemon-images">
+                    <div>
+                      <img src={pokechain.src} alt={pokechain.name} />
+                      <h1 className="chain-pokemon-name">{pokechain.name}</h1>
+                    </div>
+                    {index < pokemonChain.length - 1 && (
+                      <div className="evolution-arrow">
+                        <FaArrowRight />
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
       )}
