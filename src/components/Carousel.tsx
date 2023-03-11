@@ -8,6 +8,7 @@ function Carousel({ images }: { images: string[] }) {
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [dragEnd, setDragEnd] = useState(0);
   const [dragDelta, setDragDelta] = useState(0);
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -28,35 +29,26 @@ function Carousel({ images }: { images: string[] }) {
   };
 
   useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
+    if (isMouseOver) {
+      const handleWheel = (event: WheelEvent) => {
+        event.preventDefault();
 
-      if (event.deltaY < 0) {
-        handlePrev();
-      } else {
-        handleNext();
-      }
-    };
-    window.addEventListener("wheel", handleWheel, {
-      passive: false,
-    } as AddEventListenerOptions);
-    return () => {
-      window.removeEventListener("wheel", handleWheel, {
+        if (event.deltaY < 0) {
+          handlePrev();
+        } else {
+          handleNext();
+        }
+      };
+      window.addEventListener("wheel", handleWheel, {
         passive: false,
       } as AddEventListenerOptions);
-    };
+      return () => {
+        window.removeEventListener("wheel", handleWheel, {
+          passive: false,
+        } as AddEventListenerOptions);
+      };
+    }
   }, [handlePrev, handleNext]);
-
-  //   const handleScroll = (event: WheelEvent) => {
-  //     event.stopPropagation();
-  //     event.preventDefault();
-
-  //     if (event.deltaY < 0) {
-  //       handlePrev();
-  //     } else {
-  //       handleNext();
-  //     }
-  //   };
 
   const handleDragStart = (event: React.MouseEvent | React.TouchEvent) => {
     event.preventDefault();
@@ -156,8 +148,21 @@ function Carousel({ images }: { images: string[] }) {
     }
   };
 
+  const handleMouseEnter = () => {
+    setIsMouseOver(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseOver(false);
+  };
+
   return (
-    <div className="carousel" ref={carouselRef}>
+    <div
+      className="carousel"
+      ref={carouselRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {images.map((image, index) => (
         <div
           key={index}
