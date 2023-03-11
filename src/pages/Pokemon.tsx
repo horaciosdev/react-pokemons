@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import "../styles/PokemonSearch.css";
+import "../styles/Pokemon.css";
 import Carousel from "../components/Carousel";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -51,7 +51,7 @@ function getRandomGlareBackground(qtd: number) {
   }
 }
 
-export default function PokemonSearch() {
+export default function Pokemon() {
   const { term } = useParams();
   const [pokemon, setPokemon] = useState<IPokemon | null>(null);
   const [pokemonChain, setPokemonChain] = useState<IChain[] | null>(null);
@@ -137,12 +137,15 @@ export default function PokemonSearch() {
   }, [pokemon]);
 
   return (
-    <div>
+    <>
       {pokemon && (
         <div>
-          <header className="pokemon-search-header">
+          <header
+            className={`pokemon-search-header type_${pokemon.types[0].type.name}`}
+          >
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
             <h1 className="pokemon-title-name">{pokemon.name}</h1>
+            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           </header>
 
           <div className="cards-carousel">
@@ -181,22 +184,24 @@ export default function PokemonSearch() {
             <div className="pokemon-chain">
               {pokemonChain &&
                 pokemonChain.map((pokechain, index) => (
-                  <div key={index} className="pokemon-images">
-                    <div>
-                      <img src={pokechain.src} alt={pokechain.name} />
-                      <h1 className="chain-pokemon-name">{pokechain.name}</h1>
+                  <>
+                    <div key={index} className="pokemon-evo-card">
+                      <img
+                        className="pokemon-evo-image"
+                        src={pokechain.src}
+                        alt={pokechain.name}
+                      />
+                      <h1 className="pokemon-evo-name">{pokechain.name}</h1>
                     </div>
                     {index < pokemonChain.length - 1 && (
-                      <div className="evolution-arrow">
-                        <FaArrowRight />
-                      </div>
+                      <FaArrowRight className="pokemon-evo-arrow" />
                     )}
-                  </div>
+                  </>
                 ))}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

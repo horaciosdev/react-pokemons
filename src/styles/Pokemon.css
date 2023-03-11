@@ -1,0 +1,202 @@
+.pokemon-search-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pokemon-search-header img:first-child {
+  transform: scaleX(-1);
+}
+.pokemon-title-name {
+  text-transform: capitalize;
+}
+
+.cards-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  height: 300px;
+  background: linear-gradient(135deg, hsl(210, 84%, 55%), hsl(210, 84%, 35%));
+  border-radius: 5px;
+}
+
+.pokemon-card .card-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 0px 5px 2px #666;
+}
+
+.pokemon-card .pokemon-name {
+  text-transform: capitalize;
+  color: rgb(0, 128, 255);
+  text-shadow: 2px 2px 1px #fff, -2px -2px 1px #fff, -2px 2px 1px #fff,
+    2px -2px 1px #fff;
+}
+
+.pokemon-evolution {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pokemon-chain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+  border: solid 10px #364851;
+  border-radius: 50px;
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 90%;
+  background: radial-gradient(
+      circle at 50% 50%,
+      #364851 5%,
+      #fff 5%,
+      #fff 12%,
+      #364851 12%,
+      #364851 17%,
+      transparent 0%
+    ),
+    linear-gradient(
+      #fe3d00 0%,
+      #fe3d00 45%,
+      #364851 45%,
+      #364851 55%,
+      white 55%,
+      white 100%
+    );
+}
+
+.pokemon-evo-card {
+  width: 30%;
+  min-width: 235px;
+  text-align: center;
+}
+
+.pokemon-evo-card .pokemon-evo-image {
+  width: 100%;
+  transition: 0.4s;
+}
+.pokemon-evo-card .pokemon-evo-image:hover {
+  scale: 1.2;
+}
+
+.pokemon-evo-card .pokemon-evo-name {
+  text-transform: capitalize;
+}
+
+.pokemon-evo-arrow {
+  font-size: 2rem;
+  width: 0.0000001;
+  color: white;
+}
+
+/*#########################*/
+.cards-container {
+  width: 20rem;
+  background: white;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+}
+
+.cards-container .card {
+  min-width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+}
+
+.cards-container .card img {
+  width: 100%;
+}
+
+/* TYPES */
+.type_normal {
+  background: linear-gradient(0deg, transparent, #aa9);
+}
+
+.type_fire {
+  background: linear-gradient(0deg, transparent, #f42);
+}
+
+.type_water {
+  background: linear-gradient(0deg, transparent, #39f);
+}
+
+.type_electric {
+  background: hsl(45, 100%, linear-gradient(0deg, transparent, 60%));
+}
+
+.type_grass {
+  background: linear-gradient(0deg, transparent, #7c5);
+}
+
+.type_ice {
+  background: linear-gradient(0deg, transparent, #6cf);
+}
+
+.type_fighting {
+  background: linear-gradient(0deg, transparent, #b54);
+}
+
+.type_poison {
+  background: linear-gradient(0deg, transparent, #a59);
+}
+
+.type_ground {
+  background: linear-gradient(0deg, transparent, #db5);
+}
+
+.type_flying {
+  background: linear-gradient(0deg, transparent, #89f);
+}
+
+.type_psychic {
+  background: linear-gradient(0deg, transparent, #f59);
+}
+
+.type_bug {
+  background: linear-gradient(0deg, transparent, #ab2);
+}
+
+.type_rock {
+  background: linear-gradient(0deg, transparent, #ba6);
+}
+
+.type_ghost {
+  background: linear-gradient(0deg, transparent, #66b);
+}
+
+.type_dragon {
+  background: linear-gradient(0deg, transparent, #76e);
+}
+
+.type_dark {
+  background: linear-gradient(0deg, transparent, #754);
+}
+
+.type_steel {
+  background: linear-gradient(0deg, transparent, #aab);
+}
+
+.type_fairy {
+  background: linear-gradient(0deg, transparent, #e9e);
+}
