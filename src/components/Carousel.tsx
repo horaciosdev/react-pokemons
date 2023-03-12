@@ -29,14 +29,18 @@ function Carousel({ images }: { images: string[] }) {
   };
 
   useEffect(() => {
+    let timeoutId: number;
+
     if (isMouseOver) {
       const handleWheel = (event: WheelEvent) => {
         event.preventDefault();
 
         if (event.deltaY < 0) {
-          handlePrev();
+          clearTimeout(timeoutId);
+          timeoutId = window.setTimeout(handlePrev, 100);
         } else {
-          handleNext();
+          clearTimeout(timeoutId);
+          timeoutId = window.setTimeout(handleNext, 100);
         }
       };
       window.addEventListener("wheel", handleWheel, {
@@ -85,22 +89,20 @@ function Carousel({ images }: { images: string[] }) {
     return { x, y };
   };
 
-  let throttledFunction = false;
-  window.addEventListener("mousemove", function () {});
-
+  let canotDrag = false;
   const handleDragMove = (event: React.MouseEvent | React.TouchEvent) => {
     if (!dragging) {
       return;
     }
 
-    if (!throttledFunction) {
-      throttledFunction = true;
+    if (!canotDrag) {
+      canotDrag = true;
       setTimeout(function () {
-        throttledFunction = false;
+        canotDrag = false;
       }, 100); // ajuste o intervalo aqui, por exemplo, 100ms
     }
 
-    if (throttledFunction) {
+    if (canotDrag) {
       return;
     }
 
