@@ -1,3 +1,12 @@
+.home {
+  background-image: linear-gradient(
+    to bottom,
+    #14c6f0,
+    #091d57 850px,
+    #f02e14 90%,
+    #f07714 100%
+  );
+}
 .home-title {
   text-align: center;
   padding: 20px;

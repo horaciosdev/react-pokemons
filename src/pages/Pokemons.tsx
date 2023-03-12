@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import pokelogo from "../assets/images/pokelogo.png";
 
 export interface IResult {
   count: number;
@@ -12,9 +13,10 @@ export interface IResult {
 import "../styles/Pokemons.css";
 
 export default function Pokemons() {
-  const [result, setResult] = useState<IResult>();
+  const [result, setResult] = useState<IResult | null>(null);
 
   useEffect(() => {
+    setResult(null);
     const maxPokemons = 150;
     const api = "https://pokeapi.co/api/v2/pokemon/";
     const url = `${api}?limit=${maxPokemons}`;
@@ -30,6 +32,7 @@ export default function Pokemons() {
 
   async function handleNextPage() {
     if (result?.next) {
+      setResult(null);
       const pokemonsResponse = await axios.get(result.next);
 
       setResult(pokemonsResponse.data);
@@ -37,6 +40,7 @@ export default function Pokemons() {
   }
   async function handlePreviousPage() {
     if (result?.previous) {
+      setResult(null);
       const pokemonsResponse = await axios.get(result.previous);
 
       setResult(pokemonsResponse.data);
@@ -46,6 +50,13 @@ export default function Pokemons() {
   return (
     <div className="home">
       <h1 className="home-title">Pokemons</h1>
+      <div>
+        {!result && (
+          <div className="poke-loading">
+            <img src={pokelogo} alt="loading image" />
+          </div>
+        )}
+      </div>
       <div className="pokemons-container">
         {result &&
           result.results.map((pokemon, index) => (
