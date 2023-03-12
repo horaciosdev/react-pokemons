@@ -12,13 +12,15 @@ export const Searchbar = () => {
     setTerm(e.target.value);
   };
 
-  const handleClick = () => {
-    navigate(`pokemon/${term.trim() || ""}`);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`pokemon/${term.trim().toLocaleLowerCase() || ""}`);
+    setTerm("");
   };
 
   return (
     <div className="search-bar">
-      <div className="search-input">
+      <form className="search-input">
         <input
           type="text"
           name="search"
@@ -26,10 +28,10 @@ export const Searchbar = () => {
           onChange={handleInput}
           placeholder="Buscar pokemons..."
         />
-        <button className="search-btn" onClick={handleClick}>
+        <button className="search-btn" onClick={handleSubmit}>
           <FaSearch />
         </button>
-      </div>
+      </form>
     </div>
   );
 };
