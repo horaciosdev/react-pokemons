@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link to="/" className="navbar-item">
             Home
           </Link>
-          <Link to="pokemon/" className="navbar-item">
+          <Link to="pokemons/" className="navbar-item">
             Pokemons
           </Link>
           <Link to="contato/" className="navbar-item">

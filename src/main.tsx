@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import App from "./App";
 import Pokemon from "./pages/Pokemon";
 import "./index.css";
+import Pokemons from "./pages/Pokemons";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "pokemons/",
+        element: <Pokemons />,
       },
       {
         path: "pokemon/:term?",

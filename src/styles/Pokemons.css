@@ -1,0 +1,116 @@
+.home-title {
+  text-align: center;
+  padding: 20px;
+}
+.pokemons-container {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pokemon-mini-card {
+  width: 170px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: solid 4px #364851;
+  border-radius: 1rem;
+  border-radius: 50%;
+  background: radial-gradient(
+      circle at 50% 50%,
+      #364851 4%,
+      #fff 5%,
+      #fff 11%,
+      #364851 12%,
+      #364851 17%,
+      transparent 18%
+    ),
+    linear-gradient(
+      #fe3d00 0%,
+      #fe3d00 44%,
+      #364851 45%,
+      #364851 54%,
+      white 55%,
+      white 100%
+    );
+  box-shadow: inset -8px 0px 8px 2px #77777766, inset 8px 0px 3px 2px #ffffff66;
+  color: #000;
+  transition: 0.4s;
+}
+
+.pokemon-mini-card-image {
+  border-radius: 1rem;
+  transition: 0.1s;
+  filter: drop-shadow(4px 4px 1px #000);
+}
+.pokemon-mini-card-image img {
+  transition: 0.4s;
+}
+
+.pokemon-mini-card-name {
+  transition: 0.3s;
+}
+
+.pokemon-mini-card:hover .pokemon-mini-card-image {
+  filter: drop-shadow(6px 6px 4px #000);
+}
+.pokemon-mini-card:hover .pokemon-mini-card-image img {
+  scale: 1.5;
+}
+.pokemon-mini-card:hover .pokemon-mini-card-name {
+  font-size: 1.1rem;
+}
+
+.pokemon-name-link {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.table-pokemon-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pokemon-next-btn,
+.pokemon-previous-btn {
+  cursor: pointer;
+  background-color: #fe3d00;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.pokemon-next-btn:hover,
+.pokemon-previous-btn:hover {
+  background-color: hsl(4, 90%, 38%);
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+.pokemon-next-btn:active,
+.pokemon-previous-btn:active {
+  background-color: #f44336;
+  transform: translateY(2px);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
