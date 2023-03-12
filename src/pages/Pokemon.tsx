@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import pokelogo from "../assets/images/pokelogo.png";
 import "../styles/Pokemon.css";
 import Carousel from "../components/Carousel";
-import { FaArrowRight } from "react-icons/fa";
 
 interface IPokemon {
   name: string;
@@ -208,9 +207,6 @@ export default function Pokemon() {
                       />
                       <h1 className="pokemon-evo-name">{pokechain.name}</h1>
                     </div>
-                    {index < pokemonChain.length - 1 && (
-                      <FaArrowRight className="pokemon-evo-arrow" />
-                    )}
                   </div>
                 ))}
             </div>
