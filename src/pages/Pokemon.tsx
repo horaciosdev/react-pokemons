@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import pokelogo from "../assets/images/pokelogo.png";
 import "../styles/Pokemon.css";
@@ -53,6 +53,7 @@ function getRandomGlareBackground(qtd: number) {
 }
 
 export default function Pokemon() {
+  const navigate = useNavigate();
   const { term } = useParams();
   const [pokemon, setPokemon] = useState<IPokemon | null>(null);
   const [pokemonChain, setPokemonChain] = useState<IChain[] | null>(null);
@@ -64,6 +65,9 @@ export default function Pokemon() {
   useEffect(() => {
     async function searchPokemon() {
       setPokemon(null);
+      if (!term) {
+        navigate("/pokemons/");
+      }
       if (term) {
         const response = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${term.trim().toLocaleLowerCase()}`
