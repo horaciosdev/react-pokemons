@@ -48,8 +48,8 @@ export default function Pokemons() {
   }
 
   return (
-    <div className="home">
-      <h1 className="home-title">Pokemons</h1>
+    <div className="pokemons">
+      <h1 className="pokemons-title">Pokemons</h1>
       <div>
         {!result && (
           <div className="poke-loading">

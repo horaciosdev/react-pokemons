@@ -1,4 +1,4 @@
-.home {
+.pokemons {
   background-image: linear-gradient(
     to bottom,
     #14c6f0,
@@ -7,7 +7,7 @@
     #f07714 100%
   );
 }
-.home-title {
+.pokemons-title {
   text-align: center;
   padding: 20px;
 }
