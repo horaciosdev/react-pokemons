@@ -8,6 +8,11 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 @keyframes loading {
   0% {
     transform: rotateY(0deg);
