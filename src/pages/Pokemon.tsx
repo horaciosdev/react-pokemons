@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+import pokelogo from "../assets/images/pokelogo.png";
 import "../styles/Pokemon.css";
 import Carousel from "../components/Carousel";
 import { FaArrowRight } from "react-icons/fa";
@@ -17,6 +18,7 @@ interface IPokemon {
       "official-artwork": { front_default: string };
     };
   };
+  description: string;
 }
 
 interface IChain {
@@ -35,7 +37,7 @@ function getRandomGlareBackground(qtd: number) {
   let posx = Math.random() * 100;
   let posy = Math.random() * 100;
   let size = Math.random() + 1;
-  let trasparence = Math.random() * 10 + 3;
+  let trasparence = Math.random() * 10 + 5;
 
   if (qtd > 0) {
     let radial = `radial-gradient(circle at ${posx}% ${posy}%, rgba(255,255,255,.5) ${size}%, transparent ${trasparence}%)`;
@@ -62,9 +64,10 @@ export default function Pokemon() {
 
   useEffect(() => {
     async function searchPokemon() {
+      setPokemon(null);
       if (term) {
         const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${term}`
+          `https://pokeapi.co/api/v2/pokemon/${term.trim().toLocaleLowerCase()}`
         );
 
         // Load Chain
@@ -103,7 +106,23 @@ export default function Pokemon() {
           chain = evolvesTo;
         }
 
-        setPokemon(response.data);
+        // Load description
+        const descriptionResponse = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon-species/${term
+            .trim()
+            .toLocaleLowerCase()}`
+        );
+        const description = descriptionResponse.data.flavor_text_entries.find(
+          (entry: { language: { name: string }; version: { url: string } }) =>
+            entry.language.name === "en" &&
+            entry.version.url === "https://pokeapi.co/api/v2/version/23/"
+        ).flavor_text;
+        console.log(description);
+
+        let newPokemon: IPokemon = response.data;
+        newPokemon.description = description;
+
+        setPokemon(newPokemon);
         setPokemonChain(newPokemonChain);
       }
     }
@@ -138,54 +157,50 @@ export default function Pokemon() {
 
   return (
     <>
+      <div>
+        {!pokemon && (
+          <div className="poke-loading">
+            <img src={pokelogo} alt="loading image" />
+          </div>
+        )}
+      </div>
       {pokemon && (
         <div>
           <header
             className={`pokemon-search-header type_${pokemon.types[0].type.name}`}
           >
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            <h1 className="pokemon-title-name">{pokemon.name}</h1>
+            <div className="pokemon-title">
+              <h1 className="pokemon-title-name">{pokemon.name}</h1>
+              {pokemon.types.map((type, index) => (
+                <div key={index}>{type.type.name}</div>
+              ))}
+            </div>
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           </header>
 
-          <div className="cards-carousel">
-            <h1>Cards</h1>
-            <Carousel images={images} />
-          </div>
-          {/* <div className="cards-container">
-            {cards &&
-              cards.map((card) => (
-                <div className="card">
-                  <img key={card.id} src={card.imageUrl} alt={card.name} />
-                </div>
-              ))}
-          </div> */}
-
-          {/* <div className="pokemon-card">
+          <div className="pokemon-card-container">
             <div
-              className={`card-content type_${pokemon.types[0].type.name}`}
-              style={{
-                backgroundImage: glare,
-              }}
+              className={`pokemon-card type_gradient_${pokemon.types[0].type.name}`}
             >
-              <h2 className="pokemon-name">{pokemon.name}</h2>
-              <div className="pokemon-image">
+              <div className="card-content">
                 <img
+                  className="pokemon-card-image"
                   src={pokemon.sprites.other["official-artwork"].front_default}
                   alt={pokemon.name}
                 />
-                <p>Type: {pokemon.types[0].type.name}</p>
+                <span>{pokemon.description}</span>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="pokemon-evolution">
             <h1>Evolution</h1>
             <div className="pokemon-chain">
               {pokemonChain &&
                 pokemonChain.map((pokechain, index) => (
-                  <>
-                    <div key={index} className="pokemon-evo-card">
+                  <div key={index} className="pokemon-evo-card-container">
+                    <div className="pokemon-evo-card">
                       <img
                         className="pokemon-evo-image"
                         src={pokechain.src}
@@ -196,9 +211,14 @@ export default function Pokemon() {
                     {index < pokemonChain.length - 1 && (
                       <FaArrowRight className="pokemon-evo-arrow" />
                     )}
-                  </>
+                  </div>
                 ))}
             </div>
+          </div>
+
+          <div className="cards-carousel">
+            <h1>Cards</h1>
+            <Carousel images={images} />
           </div>
         </div>
       )}

@@ -6,8 +6,13 @@
 .pokemon-search-header img:first-child {
   transform: scaleX(-1);
 }
+.pokemon-title {
+  text-align: center;
+}
 .pokemon-title-name {
   text-transform: capitalize;
+  text-shadow: 2px 2px 1px #fff, -2px -2px 1px #fff, -2px 2px 1px #fff,
+    2px -2px 1px #fff;
 }
 
 .cards-carousel {
@@ -16,15 +21,19 @@
   align-items: center;
 }
 
+.pokemon-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-card {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 250px;
-  height: 300px;
-  background: linear-gradient(135deg, hsl(210, 84%, 55%), hsl(210, 84%, 35%));
-  border-radius: 5px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .pokemon-card .card-content {
@@ -33,18 +42,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 90%;
-  border-radius: 5px;
-  padding: 5px;
-  box-shadow: 0px 0px 5px 2px #666;
+  width: 100%;
+  height: 100%;
 }
 
-.pokemon-card .pokemon-name {
-  text-transform: capitalize;
-  color: rgb(0, 128, 255);
-  text-shadow: 2px 2px 1px #fff, -2px -2px 1px #fff, -2px 2px 1px #fff,
-    2px -2px 1px #fff;
+.pokemon-card .pokemon-card-image {
+  object-fit: cover;
 }
 
 .pokemon-evolution {
@@ -81,6 +84,11 @@
       white 55%,
       white 100%
     );
+}
+.pokemon-evo-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pokemon-evo-card {
@@ -130,73 +138,127 @@
 
 /* TYPES */
 .type_normal {
+  background-color: #aa9;
+}
+.type_gradient_normal {
   background: linear-gradient(0deg, transparent, #aa9);
 }
 
 .type_fire {
+  background-color: #f42;
+}
+.type_gradient_fire {
   background: linear-gradient(0deg, transparent, #f42);
 }
 
 .type_water {
+  background-color: #39f;
+}
+.type_gradient_water {
   background: linear-gradient(0deg, transparent, #39f);
 }
 
 .type_electric {
-  background: hsl(45, 100%, linear-gradient(0deg, transparent, 60%));
+  background-color: #fc3;
+}
+.type_gradient_electric {
+  background: linear-gradient(0deg, transparent, #fc3);
 }
 
 .type_grass {
+  background-color: #7c5;
+}
+.type_gradient_grass {
   background: linear-gradient(0deg, transparent, #7c5);
 }
 
 .type_ice {
+  background-color: #6cf;
+}
+.type_gradient_ice {
   background: linear-gradient(0deg, transparent, #6cf);
 }
 
 .type_fighting {
+  background-color: #b54;
+}
+.type_gradient_fighting {
   background: linear-gradient(0deg, transparent, #b54);
 }
 
 .type_poison {
+  background-color: #a59;
+}
+.type_gradient_poison {
   background: linear-gradient(0deg, transparent, #a59);
 }
 
 .type_ground {
+  background-color: #db5;
+}
+.type_gradient_ground {
   background: linear-gradient(0deg, transparent, #db5);
 }
 
 .type_flying {
+  background-color: #89f;
+}
+.type_gradient_flying {
   background: linear-gradient(0deg, transparent, #89f);
 }
 
 .type_psychic {
+  background-color: #f59;
+}
+.type_gradient_psychic {
   background: linear-gradient(0deg, transparent, #f59);
 }
 
 .type_bug {
+  background-color: #ab2;
+}
+.type_gradient_bug {
   background: linear-gradient(0deg, transparent, #ab2);
 }
 
 .type_rock {
+  background-color: #ba6;
+}
+.type_gradient_rock {
   background: linear-gradient(0deg, transparent, #ba6);
 }
 
 .type_ghost {
+  background-color: #66b;
+}
+.type_gradient_ghost {
   background: linear-gradient(0deg, transparent, #66b);
 }
 
 .type_dragon {
+  background-color: #76e;
+}
+.type_gradient_dragon {
   background: linear-gradient(0deg, transparent, #76e);
 }
 
 .type_dark {
+  background-color: #754;
+}
+.type_gradient_dark {
   background: linear-gradient(0deg, transparent, #754);
 }
 
 .type_steel {
+  background-color: #aab;
+}
+.type_gradient_steel {
   background: linear-gradient(0deg, transparent, #aab);
 }
 
 .type_fairy {
+  background-color: #e9e;
+}
+.type_gradient_fairy {
   background: linear-gradient(0deg, transparent, #e9e);
 }
