@@ -46,11 +46,18 @@
 
 .carousel-image img {
   width: 240px;
+  transition: width 0.4s;
 }
 
 .carousel-image.active {
   z-index: 999 !important;
   /* transform: translateY(-15%) scale(1) !important; */
+}
+.carousel-image.active:hover {
+  transform: translateY(0) !important;
+}
+.carousel-image.active:hover img {
+  width: 300px;
 }
 
 .carousel-prev,
