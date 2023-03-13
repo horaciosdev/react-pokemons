@@ -28,31 +28,31 @@ function Carousel({ images }: { images: string[] }) {
     setCurrentIndex((currentIndex + 1) % images.length);
   };
 
-  useEffect(() => {
-    let timeoutId: number;
+  // useEffect(() => {
+  //   let timeoutId: number;
 
-    if (isMouseOver) {
-      const handleWheel = (event: WheelEvent) => {
-        event.preventDefault();
+  //   if (isMouseOver) {
+  //     const handleWheel = (event: WheelEvent) => {
+  //       event.preventDefault();
 
-        if (event.deltaY < 0) {
-          clearTimeout(timeoutId);
-          timeoutId = window.setTimeout(handlePrev, 100);
-        } else {
-          clearTimeout(timeoutId);
-          timeoutId = window.setTimeout(handleNext, 100);
-        }
-      };
-      window.addEventListener("wheel", handleWheel, {
-        passive: false,
-      } as AddEventListenerOptions);
-      return () => {
-        window.removeEventListener("wheel", handleWheel, {
-          passive: false,
-        } as AddEventListenerOptions);
-      };
-    }
-  }, [handlePrev, handleNext]);
+  //       if (event.deltaY < 0) {
+  //         clearTimeout(timeoutId);
+  //         timeoutId = window.setTimeout(handlePrev, 100);
+  //       } else {
+  //         clearTimeout(timeoutId);
+  //         timeoutId = window.setTimeout(handleNext, 100);
+  //       }
+  //     };
+  //     window.addEventListener("wheel", handleWheel, {
+  //       passive: false,
+  //     } as AddEventListenerOptions);
+  //     return () => {
+  //       window.removeEventListener("wheel", handleWheel, {
+  //         passive: false,
+  //       } as AddEventListenerOptions);
+  //     };
+  //   }
+  // }, [handlePrev, handleNext]);
 
   const handleDragStart = (event: React.MouseEvent | React.TouchEvent) => {
     event.preventDefault();
