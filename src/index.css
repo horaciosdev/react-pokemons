@@ -15,7 +15,7 @@ a {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   border-radius: 1rem;
   margin: 2px;
 }
@@ -28,7 +28,7 @@ a {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #fe3d00;
+  background: #666;
   border-radius: 1rem;
 }
 
