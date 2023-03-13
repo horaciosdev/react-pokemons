@@ -1,0 +1,30 @@
+.footer {
+  margin-top: 40px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #364851;
+  padding: 20px;
+  color: #ccc;
+}
+
+.social-icons {
+  display: inline-block;
+  font-size: 2em;
+}
+
+.social-icons a {
+  color: #fff;
+  margin: 0 10px;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.social-icons a:hover {
+  color: #fe3d00;
+}
+
+.footer p {
+  font-size: 1.2em;
+}
