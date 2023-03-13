@@ -148,7 +148,8 @@ export default function Pokemon() {
         let imagesArr: string[] = [];
         if (responseCards.data.cards) {
           responseCards.data.cards.forEach((card: ICard) => {
-            imagesArr = [...imagesArr, card.imageUrl];
+            //imagesArr = [...imagesArr, card.imageUrl];
+            imagesArr = [...imagesArr, card.imageUrlHiRes];
           });
           setImages(imagesArr);
         }
@@ -176,7 +177,12 @@ export default function Pokemon() {
             <div className="pokemon-title">
               <h1 className="pokemon-title-name">{pokemon.name}</h1>
               {pokemon.types.map((type, index) => (
-                <div key={index}>{type.type.name}</div>
+                <div
+                  className={`pokemon-type-tag type_${type.type.name}`}
+                  key={index}
+                >
+                  {type.type.name}
+                </div>
               ))}
             </div>
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
@@ -198,7 +204,7 @@ export default function Pokemon() {
           </div>
 
           <div className="pokemon-evolution">
-            <h1>Evolution</h1>
+            <h1 className="section-title">Evolution</h1>
             <div className="pokemon-chain">
               {pokemonChain &&
                 pokemonChain.map((pokechain, index) => (
@@ -217,7 +223,7 @@ export default function Pokemon() {
           </div>
 
           <div className="cards-carousel">
-            <h1>Cards</h1>
+            <h1 className="section-title">Cards</h1>
             <Carousel images={images} />
           </div>
         </div>
