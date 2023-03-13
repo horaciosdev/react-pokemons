@@ -26,22 +26,16 @@ export default function Navbar() {
           <Link to="pokemons/" className="navbar-item">
             Pokemons
           </Link>
-          <Link to="contato/" className="navbar-item">
-            Contato
-          </Link>
-          <Link to="sobre/" className="navbar-item">
-            Sobre
-          </Link>
         </div>
 
-        <div className="navbar-end">
+        {/* <div className="navbar-end">
           <a className="navbar-item" href="#">
             Login
           </a>
           <a className="navbar-item" href="#">
             Cadastrar
           </a>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
