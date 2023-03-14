@@ -1,3 +1,15 @@
+.request-error {
+  font-family: "Pokemon";
+  line-height: 1.5;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: clamp(2rem, 6vw, 6rem);
+  color: #ffca05;
+  -webkit-text-stroke: 0.3rem #3262b4;
+  text-shadow: -0.6rem 0.6rem 1px #000000aa;
+  padding: 2rem;
+}
+
 .pokemon-search-header {
   display: flex;
   align-items: center;
