@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import pokelogo from "../assets/images/pokelogo.png";
 
@@ -14,6 +14,8 @@ import "../styles/Pokemons.css";
 
 export default function Pokemons() {
   const [result, setResult] = useState<IResult | null>(null);
+  const [isSticky, setIsSticky] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setResult(null);
@@ -47,9 +49,50 @@ export default function Pokemons() {
     }
   }
 
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const sticky = header.offsetTop;
+
+    const handleScroll = () => {
+      if (window.pageYOffset > sticky) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="pokemons">
-      <h1 className="pokemons-title">Pokemons</h1>
+      <header
+        id="pokemons-header"
+        ref={headerRef}
+        className={isSticky ? "sticky" : ""}
+      >
+        <h1 className="pokemons-title">Pokemons</h1>
+        <div className="pagination-container">
+          {result?.previous && (
+            <button
+              className="pokemon-previous-btn"
+              onClick={handlePreviousPage}
+            >
+              PREV
+            </button>
+          )}
+          {result?.next && (
+            <button className="pokemon-next-btn" onClick={handleNextPage}>
+              NEXT
+            </button>
+          )}
+        </div>
+      </header>
       <div>
         {!result && (
           <div className="poke-loading">
@@ -85,18 +128,6 @@ export default function Pokemons() {
               </div>
             </Link>
           ))}
-      </div>
-      <div className="pagination-container">
-        {result?.previous && (
-          <button className="pokemon-previous-btn" onClick={handlePreviousPage}>
-            PREV
-          </button>
-        )}
-        {result?.next && (
-          <button className="pokemon-next-btn" onClick={handleNextPage}>
-            NEXT
-          </button>
-        )}
       </div>
     </div>
   );

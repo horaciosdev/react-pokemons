@@ -1,3 +1,24 @@
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 0 5px 3px #000;
+}
+
+#pokemons-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-image: linear-gradient(
+    to bottom,
+    #14c6f0,
+    #091d57 850px,
+    #f02e14 90%,
+    #f07714 100%
+  );
+  z-index: 99;
+}
+
 .pokemons {
   background-image: linear-gradient(
     to bottom,
@@ -10,9 +31,11 @@
 .pokemons-title {
   text-align: center;
   padding: 20px;
+  color: #fff;
+  text-shadow: 2px 3px 2px #000;
 }
 .pokemons-container {
-  padding: 0 1rem;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,26 +123,25 @@
   cursor: pointer;
   background-color: #fe3d00;
   color: white;
-  padding: 12px 24px;
+  padding: 10px 22px;
   border: none;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 3px 1px 1px #000;
   transition: all 0.2s;
 }
 
 .pokemon-next-btn:hover,
 .pokemon-previous-btn:hover {
-  background-color: hsl(4, 90%, 38%);
   transform: translateY(-2px);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 5px 3px 1px #000;
 }
 .pokemon-next-btn:active,
 .pokemon-previous-btn:active {
   background-color: #f44336;
-  transform: translateY(2px);
+  transform: translateY(4px);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
 }
