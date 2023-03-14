@@ -5,6 +5,11 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+  font-family: "Pokemon";
+  src: url("./assets/fonts/Pokemon Solid.ttf");
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
