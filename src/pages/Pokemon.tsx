@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import questionMark from "../assets/images/question-mark.png";
 
 import "../styles/Pokemon.css";
 import Carousel from "../components/Carousel";
@@ -218,7 +219,17 @@ export default function Pokemon() {
           <header
             className={`pokemon-search-header type_${pokemon.types[0].type.name}`}
           >
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            {!pokemon.sprites.front_default && (
+              <img
+                src={questionMark}
+                className="not-found-pixelmon"
+                alt={pokemon.name}
+              />
+            )}
+            {pokemon.sprites.front_default && (
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            )}
+
             <div className="pokemon-title">
               <h1 className="pokemon-title-name">{pokemon.name}</h1>
               {pokemon.types.map((type, index) => (
@@ -230,7 +241,16 @@ export default function Pokemon() {
                 </div>
               ))}
             </div>
-            <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            {!pokemon.sprites.front_default && (
+              <img
+                src={questionMark}
+                className="not-found-pixelmon"
+                alt={pokemon.name}
+              />
+            )}
+            {pokemon.sprites.front_default && (
+              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            )}
           </header>
 
           <div className="pokemon-card-container">
@@ -238,11 +258,25 @@ export default function Pokemon() {
               className={`pokemon-card type_gradient_${pokemon.types[0].type.name}`}
             >
               <div className="card-content">
-                <img
-                  className="pokemon-card-image"
-                  src={pokemon.sprites.other["official-artwork"].front_default}
-                  alt={pokemon.name}
-                />
+                {!pokemon.sprites.other["official-artwork"].front_default && (
+                  <div>
+                    <img
+                      src={questionMark}
+                      className="not-found-pixelmon"
+                      alt={pokemon.name}
+                    />
+                    <div style={{ textAlign: "center" }}>Image Not Found</div>
+                  </div>
+                )}
+                {pokemon.sprites.other["official-artwork"].front_default && (
+                  <img
+                    className="pokemon-card-image"
+                    src={
+                      pokemon.sprites.other["official-artwork"].front_default
+                    }
+                    alt={pokemon.name}
+                  />
+                )}
                 <span>{pokemon.description}</span>
               </div>
             </div>

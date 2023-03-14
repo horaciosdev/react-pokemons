@@ -15,9 +15,16 @@
   align-items: center;
   justify-content: center;
 }
+
 .pokemon-search-header img:first-child {
   transform: scaleX(-1);
 }
+
+.pokemon-search-header img.not-found-pixelmon {
+  transform: scaleX(1);
+  width: 1.5rem;
+}
+
 .pokemon-title {
   text-align: center;
 }
