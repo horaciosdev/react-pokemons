@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import pokelogo from "../assets/images/pokelogo.png";
+import questionMark from "../assets/images/question-mark.png";
 
 export interface IResult {
   count: number;
@@ -69,6 +70,13 @@ export default function Pokemons() {
     };
   }, []);
 
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    e.currentTarget.src = questionMark;
+    e.currentTarget.className = "not-found-image";
+  };
+
   return (
     <div className="pokemons">
       <header
@@ -114,6 +122,7 @@ export default function Pokemons() {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url
                       .split("/")
                       .slice(-2, -1)}.png`}
+                    onError={handleImageError}
                     alt={pokemon.name}
                   />
                 </div>
