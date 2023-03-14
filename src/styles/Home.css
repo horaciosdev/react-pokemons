@@ -5,23 +5,14 @@
   flex-direction: column;
   width: 100%;
   min-height: 80vh;
-  background: radial-gradient(
-      circle at 50% 50%,
-      #364851 4.9%,
-      #fff 5%,
-      #fff 11.9%,
-      #364851 12%,
-      #364851 17.9%,
-      transparent 18%
-    ),
-    linear-gradient(
-      #fe3d00 0%,
-      #fe3d00 45%,
-      #364851 45%,
-      #364851 55%,
-      white 55%,
-      white 100%
-    );
+  background: linear-gradient(
+    #fe3d00 0%,
+    #fe3d00 45%,
+    #364851 45%,
+    #364851 55%,
+    white 55%,
+    white 100%
+  );
 }
 
 .home-welcome {
@@ -131,10 +122,6 @@
   animation: shakeball 0.7s linear infinite;
 }
 
-@font-face {
-  font-family: "Pokemon";
-  src: url("../assets/fonts/Pokemon Solid.ttf");
-}
 .its-pokemon {
   pointer-events: none;
   position: absolute;
