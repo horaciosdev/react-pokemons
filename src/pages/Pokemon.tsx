@@ -70,99 +70,90 @@ export default function Pokemon() {
     setPokemon(null);
 
     async function searchPokemon() {
+      if (!term) {
+        navigate("/pokemons/");
+        return;
+      }
+
       setPokemon(null);
       setPokemonChain(null);
       setCardImages([]);
-      if (!term) {
-        navigate("/pokemons/");
-      }
-      if (term) {
-        let response = null;
+
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${term.trim().toLocaleLowerCase()}`
+        );
+        let newPokemon: IPokemon = response.data;
+
         try {
-          response = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon/${term
+          // Load description
+          const descriptionResponse = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon-species/${term
               .trim()
               .toLocaleLowerCase()}`
           );
-          let newPokemon: IPokemon = response.data;
-          setPokemon(newPokemon);
+          const description = descriptionResponse.data.flavor_text_entries.find(
+            (entry: { language: { name: string }; version: { url: string } }) =>
+              entry.language.name === "en" &&
+              entry.version.url === "https://pokeapi.co/api/v2/version/23/"
+          ).flavor_text;
+
+          newPokemon.description = description;
         } catch (error: any) {
-          setNotFound(true);
-          setResponseError(error);
+          //newPokemon.description = `Description ${error}`;
+          newPokemon.description = "";
         }
 
+        setPokemon(newPokemon);
+        searchChain(response);
+      } catch (error: any) {
+        setNotFound(true);
+        setResponseError(error);
+      }
+    }
+
+    async function searchChain(response: any) {
+      if (response) {
         try {
-          if (pokemon) {
-            // Load description
-            const descriptionResponse = await axios.get(
-              `https://pokeapi.co/api/v2/pokemon-species/${term
-                .trim()
-                .toLocaleLowerCase()}`
-            );
-            const description =
-              descriptionResponse.data.flavor_text_entries.find(
-                (entry: {
-                  language: { name: string };
-                  version: { url: string };
-                }) =>
-                  entry.language.name === "en" &&
-                  entry.version.url === "https://pokeapi.co/api/v2/version/23/"
-              ).flavor_text;
+          // Load Chain
+          const speciesUrl = response.data.species.url;
+          const speciesResponse = await axios.get(speciesUrl);
+          const evolutionChainUrl = speciesResponse.data.evolution_chain.url;
+          const evolutionChainResponse = await axios.get(evolutionChainUrl);
 
-            let newPokemon = pokemon;
-            newPokemon.description = description;
-            setPokemon(newPokemon);
-          }
-        } catch (error: any) {
-          if (pokemon) {
-            let newPokemon = pokemon;
-            newPokemon.description = `Description ${error.response.data}`;
-            setPokemon(newPokemon);
-          }
-        }
+          let chain = evolutionChainResponse.data.chain;
 
-        if (response) {
-          try {
-            // Load Chain
-            const speciesUrl = response.data.species.url;
-            const speciesResponse = await axios.get(speciesUrl);
-            const evolutionChainUrl = speciesResponse.data.evolution_chain.url;
-            const evolutionChainResponse = await axios.get(evolutionChainUrl);
+          let url = chain.species.url;
+          let segments = url.split("/");
+          let id = segments[segments.length - 2];
 
-            let chain = evolutionChainResponse.data.chain;
+          let newPokemonChain = [
+            {
+              name: chain.species.name,
+              src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+            },
+          ];
 
-            let url = chain.species.url;
-            let segments = url.split("/");
-            let id = segments[segments.length - 2];
+          while (chain.evolves_to.length > 0) {
+            const evolvesTo = chain.evolves_to[0];
 
-            let newPokemonChain = [
+            url = evolvesTo.species.url;
+            segments = url.split("/");
+            id = segments[segments.length - 2];
+
+            newPokemonChain = [
+              ...newPokemonChain,
               {
-                name: chain.species.name,
+                name: evolvesTo.species.name,
                 src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
               },
             ];
-
-            while (chain.evolves_to.length > 0) {
-              const evolvesTo = chain.evolves_to[0];
-
-              url = evolvesTo.species.url;
-              segments = url.split("/");
-              id = segments[segments.length - 2];
-
-              newPokemonChain = [
-                ...newPokemonChain,
-                {
-                  name: evolvesTo.species.name,
-                  src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
-                },
-              ];
-              chain = evolvesTo;
-            }
-
-            setPokemonChain(newPokemonChain);
-          } catch (error: any) {
-            //catch here
+            chain = evolvesTo;
           }
+
+          setPokemonChain(newPokemonChain);
+        } catch (error: any) {
+          //catch here
         }
       }
     }
