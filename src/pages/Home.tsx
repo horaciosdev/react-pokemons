@@ -5,6 +5,7 @@ import question from "../assets/images/question-mark.png";
 import pokemon_logotext from "../assets/images/pokemon.png";
 import logo from "../assets/images/pokelogo.png";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 interface IPokemon {
   name: string;
@@ -40,6 +41,7 @@ export default function Home() {
   return (
     <div className="home">
       <h1 className="home-welcome">Bem-vindos, treinadores!</h1>
+      {!pokemon && <Loading />}
       {pokemon && (
         <div className="whois-container">
           <img
