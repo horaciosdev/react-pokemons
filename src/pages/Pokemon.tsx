@@ -293,7 +293,7 @@ export default function Pokemon() {
             </div>
           )}
 
-          {cardImages.length && (
+          {cardImages.length != 0 && (
             <div className="cards-carousel">
               <h1 className="section-title">Cards</h1>
               <Carousel images={cardImages} />
