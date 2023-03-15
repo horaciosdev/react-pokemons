@@ -8,6 +8,7 @@
 #pokemons-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   background-image: linear-gradient(
     to bottom,
@@ -30,7 +31,6 @@
 }
 .pokemons-title {
   text-align: center;
-  padding: 20px;
   color: #fff;
   text-shadow: 2px 3px 2px #000;
 }

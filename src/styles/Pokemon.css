@@ -67,10 +67,12 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0 1rem;
 }
 
 .pokemon-card .pokemon-card-image {
   object-fit: cover;
+  max-width: 100%;
 }
 
 .pokemon-evolution {
@@ -89,7 +91,8 @@
   border-radius: 50px;
   margin: 0 auto;
   padding: 0 30px;
-  width: 90%;
+  max-width: 1200px;
+  width: 100%;
   background: radial-gradient(
       circle at 50% 50%,
       #364851 4.8%,

@@ -19,11 +19,12 @@
   color: white;
   padding: 1rem 0;
   text-shadow: 2px 2px 2px #000;
+  text-align: center;
 }
 
 .whois-container {
   border-radius: 1rem;
-  border: solid 1rem #364851;
+  border: solid 0.8rem #364851;
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
@@ -36,6 +37,7 @@
   background-repeat: no-repeat;
   padding: 2rem;
   aspect-ratio: 16/9;
+  width: 100%;
   max-width: 1220px;
 }
 

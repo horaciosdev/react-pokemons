@@ -6,7 +6,8 @@
   height: 500px;
   margin: 0 auto;
   padding: 0 30px;
-  width: 90%;
+  max-width: 1200px;
+  width: 100%;
   overflow-x: hidden;
   cursor: grab;
   user-select: none;
